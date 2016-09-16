@@ -1,5 +1,5 @@
 {
-  "name": "node-draw",
+  "name": "node-paint",
   "version": "0.0.1",
   "description": "A multiplayer drawing pad.",
   "main": "app.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spacegeek224/node-draw.git"
+    "url": "git+https://github.com/spacegeek224/node-paint.git"
   },
   "keywords": [
     "draw"
@@ -16,9 +16,9 @@
   "author": "Maris Usis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spacegeek224/node-draw/issues"
+    "url": "https://github.com/spacegeek224/node-paint/issues"
   },
-  "homepage": "https://github.com/spacegeek224/node-draw#readme",
+  "homepage": "https://github.com/spacegeek224/node-paint#readme",
   "dependencies": {
     "express": "^4.13.4",
     "gulp": "^3.9.1",
