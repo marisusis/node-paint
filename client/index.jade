@@ -1,0 +1,36 @@
+- var colors = ['red','orange','yellow','green','aqua','blue','purple','pink','brown','white'];
+//- doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Drawing Pad 2.0
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='css/normalize.css')
+    link(rel='stylesheet prefetch', href='https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans|Montserrat')
+    link(rel='stylesheet', href='css/style.css')
+  body
+    .editor
+      canvas#cdraw
+      canvas#cfg
+    .controls
+      .color
+        .shades
+          - for (var i=0;i<32;i++)
+            .shade(class='shade-'+(i+1),data-color=colors[0])
+        .hues
+          - for (var i=0;i<10;i++)
+            .hue(class='hue-'+(i+1),data-color=colors[i])
+        .current
+      .brush
+        .sizes
+          .size(data-size='sm')
+          .size(data-size='md')
+          .size(data-size='lg')
+        .hardness
+    .cursors
+    .menu
+      .menu--item(data-item='save') SAVE
+      //- .menu--item QUIT
+    script(src='/socket.io/socket.io.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='js/index.js')

@@ -1,0 +1,83 @@
+
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Drawing Pad 2.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans|Montserrat"/>
+    <link rel="stylesheet" href="css/style.css"/>
+  </head>
+  <body>
+    <div class="editor">
+      <canvas id="cdraw"></canvas>
+      <canvas id="cfg"></canvas>
+    </div>
+    <div class="controls">
+      <div class="color">
+        <div class="shades">
+          <div data-color="red" class="shade shade-1"></div>
+          <div data-color="red" class="shade shade-2"></div>
+          <div data-color="red" class="shade shade-3"></div>
+          <div data-color="red" class="shade shade-4"></div>
+          <div data-color="red" class="shade shade-5"></div>
+          <div data-color="red" class="shade shade-6"></div>
+          <div data-color="red" class="shade shade-7"></div>
+          <div data-color="red" class="shade shade-8"></div>
+          <div data-color="red" class="shade shade-9"></div>
+          <div data-color="red" class="shade shade-10"></div>
+          <div data-color="red" class="shade shade-11"></div>
+          <div data-color="red" class="shade shade-12"></div>
+          <div data-color="red" class="shade shade-13"></div>
+          <div data-color="red" class="shade shade-14"></div>
+          <div data-color="red" class="shade shade-15"></div>
+          <div data-color="red" class="shade shade-16"></div>
+          <div data-color="red" class="shade shade-17"></div>
+          <div data-color="red" class="shade shade-18"></div>
+          <div data-color="red" class="shade shade-19"></div>
+          <div data-color="red" class="shade shade-20"></div>
+          <div data-color="red" class="shade shade-21"></div>
+          <div data-color="red" class="shade shade-22"></div>
+          <div data-color="red" class="shade shade-23"></div>
+          <div data-color="red" class="shade shade-24"></div>
+          <div data-color="red" class="shade shade-25"></div>
+          <div data-color="red" class="shade shade-26"></div>
+          <div data-color="red" class="shade shade-27"></div>
+          <div data-color="red" class="shade shade-28"></div>
+          <div data-color="red" class="shade shade-29"></div>
+          <div data-color="red" class="shade shade-30"></div>
+          <div data-color="red" class="shade shade-31"></div>
+          <div data-color="red" class="shade shade-32"></div>
+        </div>
+        <div class="hues">
+          <div data-color="red" class="hue hue-1"></div>
+          <div data-color="orange" class="hue hue-2"></div>
+          <div data-color="yellow" class="hue hue-3"></div>
+          <div data-color="green" class="hue hue-4"></div>
+          <div data-color="aqua" class="hue hue-5"></div>
+          <div data-color="blue" class="hue hue-6"></div>
+          <div data-color="purple" class="hue hue-7"></div>
+          <div data-color="pink" class="hue hue-8"></div>
+          <div data-color="brown" class="hue hue-9"></div>
+          <div data-color="white" class="hue hue-10"></div>
+        </div>
+        <div class="current"></div>
+      </div>
+      <div class="brush">
+        <div class="sizes">
+          <div data-size="sm" class="size"></div>
+          <div data-size="md" class="size"></div>
+          <div data-size="lg" class="size"></div>
+        </div>
+        <div class="hardness"></div>
+      </div>
+    </div>
+    <div class="cursors"></div>
+    <div class="menu">
+      <div data-item="save" class="menu--item">SAVE</div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

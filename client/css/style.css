@@ -1,0 +1,831 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  user-select: none; }
+
+.editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .editor canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+    background: transparent; }
+    .editor canvas #cfg {
+      z-index: 10; }
+
+.controls {
+  width: 140px;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  background: transparent;
+  bottom: 0;
+  padding: 10px;
+  z-index: 100; }
+  .controls .color {
+    width: 120px;
+    height: 328px;
+    background: #eee;
+    box-shadow: 0 0 5px #c0c0c0; }
+    .controls .color .current {
+      width: 100%;
+      height: 40px;
+      background: #000;
+      transition: all .5s; }
+    .controls .color .hues {
+      width: 120px;
+      height: 48px; }
+      .controls .color .hues .hue {
+        display: block;
+        float: left;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        -webkit-clip-path: circle(25% at 50% 50%);
+        clip-path: circle(25% at 50% 50%); }
+        .controls .color .hues .hue::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          max-width: 0;
+          background: rgba(0, 0, 0, 0.3);
+          transition: all .5s; }
+        .controls .color .hues .hue:hover {
+          cursor: pointer; }
+          .controls .color .hues .hue:hover::after {
+            max-width: 100%;
+            max-height: 100%; }
+        .controls .color .hues .hue.selected::after {
+          max-width: 100%;
+          max-height: 100%; }
+        .controls .color .hues .hue.hue-1 {
+          background: #e04040; }
+        .controls .color .hues .hue.hue-2 {
+          background: #e08040; }
+        .controls .color .hues .hue.hue-3 {
+          background: #e0e040; }
+        .controls .color .hues .hue.hue-4 {
+          background: #40e040; }
+        .controls .color .hues .hue.hue-5 {
+          background: #40e0e0; }
+        .controls .color .hues .hue.hue-6 {
+          background: #4040ff; }
+        .controls .color .hues .hue.hue-7 {
+          background: #e040e0; }
+        .controls .color .hues .hue.hue-8 {
+          background: #e08080; }
+        .controls .color .hues .hue.hue-9 {
+          background: #c06020; }
+        .controls .color .hues .hue.hue-10 {
+          background: #e0e0e0; }
+    .controls .color .shades {
+      width: 120px;
+      height: 240px; }
+      .controls .color .shades .shade {
+        transition: all .3s;
+        display: block;
+        float: left;
+        width: 30px;
+        height: 30px; }
+        .controls .color .shades .shade:hover {
+          cursor: crosshair; }
+        .controls .color .shades .shade.shade-1[data-color=red] {
+          background: #070202; }
+        .controls .color .shades .shade.shade-1[data-color=orange] {
+          background: #070402; }
+        .controls .color .shades .shade.shade-1[data-color=yellow] {
+          background: #070702; }
+        .controls .color .shades .shade.shade-1[data-color=green] {
+          background: #020702; }
+        .controls .color .shades .shade.shade-1[data-color=aqua] {
+          background: #020707; }
+        .controls .color .shades .shade.shade-1[data-color=blue] {
+          background: #020208; }
+        .controls .color .shades .shade.shade-1[data-color=purple] {
+          background: #070207; }
+        .controls .color .shades .shade.shade-1[data-color=pink] {
+          background: #070404; }
+        .controls .color .shades .shade.shade-1[data-color=brown] {
+          background: #060301; }
+        .controls .color .shades .shade.shade-1[data-color=white] {
+          background: #070707; }
+        .controls .color .shades .shade.shade-2[data-color=red] {
+          background: #0e0404; }
+        .controls .color .shades .shade.shade-2[data-color=orange] {
+          background: #0e0804; }
+        .controls .color .shades .shade.shade-2[data-color=yellow] {
+          background: #0e0e04; }
+        .controls .color .shades .shade.shade-2[data-color=green] {
+          background: #040e04; }
+        .controls .color .shades .shade.shade-2[data-color=aqua] {
+          background: #040e0e; }
+        .controls .color .shades .shade.shade-2[data-color=blue] {
+          background: #040410; }
+        .controls .color .shades .shade.shade-2[data-color=purple] {
+          background: #0e040e; }
+        .controls .color .shades .shade.shade-2[data-color=pink] {
+          background: #0e0808; }
+        .controls .color .shades .shade.shade-2[data-color=brown] {
+          background: #0c0602; }
+        .controls .color .shades .shade.shade-2[data-color=white] {
+          background: #0e0e0e; }
+        .controls .color .shades .shade.shade-3[data-color=red] {
+          background: #150606; }
+        .controls .color .shades .shade.shade-3[data-color=orange] {
+          background: #150c06; }
+        .controls .color .shades .shade.shade-3[data-color=yellow] {
+          background: #151506; }
+        .controls .color .shades .shade.shade-3[data-color=green] {
+          background: #061506; }
+        .controls .color .shades .shade.shade-3[data-color=aqua] {
+          background: #061515; }
+        .controls .color .shades .shade.shade-3[data-color=blue] {
+          background: #060618; }
+        .controls .color .shades .shade.shade-3[data-color=purple] {
+          background: #150615; }
+        .controls .color .shades .shade.shade-3[data-color=pink] {
+          background: #150c0c; }
+        .controls .color .shades .shade.shade-3[data-color=brown] {
+          background: #120903; }
+        .controls .color .shades .shade.shade-3[data-color=white] {
+          background: #151515; }
+        .controls .color .shades .shade.shade-4[data-color=red] {
+          background: #1c0808; }
+        .controls .color .shades .shade.shade-4[data-color=orange] {
+          background: #1c1008; }
+        .controls .color .shades .shade.shade-4[data-color=yellow] {
+          background: #1c1c08; }
+        .controls .color .shades .shade.shade-4[data-color=green] {
+          background: #081c08; }
+        .controls .color .shades .shade.shade-4[data-color=aqua] {
+          background: #081c1c; }
+        .controls .color .shades .shade.shade-4[data-color=blue] {
+          background: #080820; }
+        .controls .color .shades .shade.shade-4[data-color=purple] {
+          background: #1c081c; }
+        .controls .color .shades .shade.shade-4[data-color=pink] {
+          background: #1c1010; }
+        .controls .color .shades .shade.shade-4[data-color=brown] {
+          background: #180c04; }
+        .controls .color .shades .shade.shade-4[data-color=white] {
+          background: #1c1c1c; }
+        .controls .color .shades .shade.shade-5[data-color=red] {
+          background: #230a0a; }
+        .controls .color .shades .shade.shade-5[data-color=orange] {
+          background: #23140a; }
+        .controls .color .shades .shade.shade-5[data-color=yellow] {
+          background: #23230a; }
+        .controls .color .shades .shade.shade-5[data-color=green] {
+          background: #0a230a; }
+        .controls .color .shades .shade.shade-5[data-color=aqua] {
+          background: #0a2323; }
+        .controls .color .shades .shade.shade-5[data-color=blue] {
+          background: #0a0a28; }
+        .controls .color .shades .shade.shade-5[data-color=purple] {
+          background: #230a23; }
+        .controls .color .shades .shade.shade-5[data-color=pink] {
+          background: #231414; }
+        .controls .color .shades .shade.shade-5[data-color=brown] {
+          background: #1e0f05; }
+        .controls .color .shades .shade.shade-5[data-color=white] {
+          background: #232323; }
+        .controls .color .shades .shade.shade-6[data-color=red] {
+          background: #2a0c0c; }
+        .controls .color .shades .shade.shade-6[data-color=orange] {
+          background: #2a180c; }
+        .controls .color .shades .shade.shade-6[data-color=yellow] {
+          background: #2a2a0c; }
+        .controls .color .shades .shade.shade-6[data-color=green] {
+          background: #0c2a0c; }
+        .controls .color .shades .shade.shade-6[data-color=aqua] {
+          background: #0c2a2a; }
+        .controls .color .shades .shade.shade-6[data-color=blue] {
+          background: #0c0c30; }
+        .controls .color .shades .shade.shade-6[data-color=purple] {
+          background: #2a0c2a; }
+        .controls .color .shades .shade.shade-6[data-color=pink] {
+          background: #2a1818; }
+        .controls .color .shades .shade.shade-6[data-color=brown] {
+          background: #241206; }
+        .controls .color .shades .shade.shade-6[data-color=white] {
+          background: #2a2a2a; }
+        .controls .color .shades .shade.shade-7[data-color=red] {
+          background: #310e0e; }
+        .controls .color .shades .shade.shade-7[data-color=orange] {
+          background: #311c0e; }
+        .controls .color .shades .shade.shade-7[data-color=yellow] {
+          background: #31310e; }
+        .controls .color .shades .shade.shade-7[data-color=green] {
+          background: #0e310e; }
+        .controls .color .shades .shade.shade-7[data-color=aqua] {
+          background: #0e3131; }
+        .controls .color .shades .shade.shade-7[data-color=blue] {
+          background: #0e0e38; }
+        .controls .color .shades .shade.shade-7[data-color=purple] {
+          background: #310e31; }
+        .controls .color .shades .shade.shade-7[data-color=pink] {
+          background: #311c1c; }
+        .controls .color .shades .shade.shade-7[data-color=brown] {
+          background: #2a1507; }
+        .controls .color .shades .shade.shade-7[data-color=white] {
+          background: #313131; }
+        .controls .color .shades .shade.shade-8[data-color=red] {
+          background: #381010; }
+        .controls .color .shades .shade.shade-8[data-color=orange] {
+          background: #382010; }
+        .controls .color .shades .shade.shade-8[data-color=yellow] {
+          background: #383810; }
+        .controls .color .shades .shade.shade-8[data-color=green] {
+          background: #103810; }
+        .controls .color .shades .shade.shade-8[data-color=aqua] {
+          background: #103838; }
+        .controls .color .shades .shade.shade-8[data-color=blue] {
+          background: #101040; }
+        .controls .color .shades .shade.shade-8[data-color=purple] {
+          background: #381038; }
+        .controls .color .shades .shade.shade-8[data-color=pink] {
+          background: #382020; }
+        .controls .color .shades .shade.shade-8[data-color=brown] {
+          background: #301808; }
+        .controls .color .shades .shade.shade-8[data-color=white] {
+          background: #383838; }
+        .controls .color .shades .shade.shade-9[data-color=red] {
+          background: #3f1212; }
+        .controls .color .shades .shade.shade-9[data-color=orange] {
+          background: #3f2412; }
+        .controls .color .shades .shade.shade-9[data-color=yellow] {
+          background: #3f3f12; }
+        .controls .color .shades .shade.shade-9[data-color=green] {
+          background: #123f12; }
+        .controls .color .shades .shade.shade-9[data-color=aqua] {
+          background: #123f3f; }
+        .controls .color .shades .shade.shade-9[data-color=blue] {
+          background: #121248; }
+        .controls .color .shades .shade.shade-9[data-color=purple] {
+          background: #3f123f; }
+        .controls .color .shades .shade.shade-9[data-color=pink] {
+          background: #3f2424; }
+        .controls .color .shades .shade.shade-9[data-color=brown] {
+          background: #361b09; }
+        .controls .color .shades .shade.shade-9[data-color=white] {
+          background: #3f3f3f; }
+        .controls .color .shades .shade.shade-10[data-color=red] {
+          background: #461414; }
+        .controls .color .shades .shade.shade-10[data-color=orange] {
+          background: #462814; }
+        .controls .color .shades .shade.shade-10[data-color=yellow] {
+          background: #464614; }
+        .controls .color .shades .shade.shade-10[data-color=green] {
+          background: #144614; }
+        .controls .color .shades .shade.shade-10[data-color=aqua] {
+          background: #144646; }
+        .controls .color .shades .shade.shade-10[data-color=blue] {
+          background: #141450; }
+        .controls .color .shades .shade.shade-10[data-color=purple] {
+          background: #461446; }
+        .controls .color .shades .shade.shade-10[data-color=pink] {
+          background: #462828; }
+        .controls .color .shades .shade.shade-10[data-color=brown] {
+          background: #3c1e0a; }
+        .controls .color .shades .shade.shade-10[data-color=white] {
+          background: #464646; }
+        .controls .color .shades .shade.shade-11[data-color=red] {
+          background: #4d1616; }
+        .controls .color .shades .shade.shade-11[data-color=orange] {
+          background: #4d2c16; }
+        .controls .color .shades .shade.shade-11[data-color=yellow] {
+          background: #4d4d16; }
+        .controls .color .shades .shade.shade-11[data-color=green] {
+          background: #164d16; }
+        .controls .color .shades .shade.shade-11[data-color=aqua] {
+          background: #164d4d; }
+        .controls .color .shades .shade.shade-11[data-color=blue] {
+          background: #161658; }
+        .controls .color .shades .shade.shade-11[data-color=purple] {
+          background: #4d164d; }
+        .controls .color .shades .shade.shade-11[data-color=pink] {
+          background: #4d2c2c; }
+        .controls .color .shades .shade.shade-11[data-color=brown] {
+          background: #42210b; }
+        .controls .color .shades .shade.shade-11[data-color=white] {
+          background: #4d4d4d; }
+        .controls .color .shades .shade.shade-12[data-color=red] {
+          background: #541818; }
+        .controls .color .shades .shade.shade-12[data-color=orange] {
+          background: #543018; }
+        .controls .color .shades .shade.shade-12[data-color=yellow] {
+          background: #545418; }
+        .controls .color .shades .shade.shade-12[data-color=green] {
+          background: #185418; }
+        .controls .color .shades .shade.shade-12[data-color=aqua] {
+          background: #185454; }
+        .controls .color .shades .shade.shade-12[data-color=blue] {
+          background: #181860; }
+        .controls .color .shades .shade.shade-12[data-color=purple] {
+          background: #541854; }
+        .controls .color .shades .shade.shade-12[data-color=pink] {
+          background: #543030; }
+        .controls .color .shades .shade.shade-12[data-color=brown] {
+          background: #48240c; }
+        .controls .color .shades .shade.shade-12[data-color=white] {
+          background: #545454; }
+        .controls .color .shades .shade.shade-13[data-color=red] {
+          background: #5b1a1a; }
+        .controls .color .shades .shade.shade-13[data-color=orange] {
+          background: #5b341a; }
+        .controls .color .shades .shade.shade-13[data-color=yellow] {
+          background: #5b5b1a; }
+        .controls .color .shades .shade.shade-13[data-color=green] {
+          background: #1a5b1a; }
+        .controls .color .shades .shade.shade-13[data-color=aqua] {
+          background: #1a5b5b; }
+        .controls .color .shades .shade.shade-13[data-color=blue] {
+          background: #1a1a68; }
+        .controls .color .shades .shade.shade-13[data-color=purple] {
+          background: #5b1a5b; }
+        .controls .color .shades .shade.shade-13[data-color=pink] {
+          background: #5b3434; }
+        .controls .color .shades .shade.shade-13[data-color=brown] {
+          background: #4e270d; }
+        .controls .color .shades .shade.shade-13[data-color=white] {
+          background: #5b5b5b; }
+        .controls .color .shades .shade.shade-14[data-color=red] {
+          background: #621c1c; }
+        .controls .color .shades .shade.shade-14[data-color=orange] {
+          background: #62381c; }
+        .controls .color .shades .shade.shade-14[data-color=yellow] {
+          background: #62621c; }
+        .controls .color .shades .shade.shade-14[data-color=green] {
+          background: #1c621c; }
+        .controls .color .shades .shade.shade-14[data-color=aqua] {
+          background: #1c6262; }
+        .controls .color .shades .shade.shade-14[data-color=blue] {
+          background: #1c1c70; }
+        .controls .color .shades .shade.shade-14[data-color=purple] {
+          background: #621c62; }
+        .controls .color .shades .shade.shade-14[data-color=pink] {
+          background: #623838; }
+        .controls .color .shades .shade.shade-14[data-color=brown] {
+          background: #542a0e; }
+        .controls .color .shades .shade.shade-14[data-color=white] {
+          background: #626262; }
+        .controls .color .shades .shade.shade-15[data-color=red] {
+          background: #691e1e; }
+        .controls .color .shades .shade.shade-15[data-color=orange] {
+          background: #693c1e; }
+        .controls .color .shades .shade.shade-15[data-color=yellow] {
+          background: #69691e; }
+        .controls .color .shades .shade.shade-15[data-color=green] {
+          background: #1e691e; }
+        .controls .color .shades .shade.shade-15[data-color=aqua] {
+          background: #1e6969; }
+        .controls .color .shades .shade.shade-15[data-color=blue] {
+          background: #1e1e78; }
+        .controls .color .shades .shade.shade-15[data-color=purple] {
+          background: #691e69; }
+        .controls .color .shades .shade.shade-15[data-color=pink] {
+          background: #693c3c; }
+        .controls .color .shades .shade.shade-15[data-color=brown] {
+          background: #5a2d0f; }
+        .controls .color .shades .shade.shade-15[data-color=white] {
+          background: dimgray; }
+        .controls .color .shades .shade.shade-16[data-color=red] {
+          background: #702020; }
+        .controls .color .shades .shade.shade-16[data-color=orange] {
+          background: #704020; }
+        .controls .color .shades .shade.shade-16[data-color=yellow] {
+          background: #707020; }
+        .controls .color .shades .shade.shade-16[data-color=green] {
+          background: #207020; }
+        .controls .color .shades .shade.shade-16[data-color=aqua] {
+          background: #207070; }
+        .controls .color .shades .shade.shade-16[data-color=blue] {
+          background: #202080; }
+        .controls .color .shades .shade.shade-16[data-color=purple] {
+          background: #702070; }
+        .controls .color .shades .shade.shade-16[data-color=pink] {
+          background: #704040; }
+        .controls .color .shades .shade.shade-16[data-color=brown] {
+          background: #603010; }
+        .controls .color .shades .shade.shade-16[data-color=white] {
+          background: #707070; }
+        .controls .color .shades .shade.shade-17[data-color=red] {
+          background: #772222; }
+        .controls .color .shades .shade.shade-17[data-color=orange] {
+          background: #774422; }
+        .controls .color .shades .shade.shade-17[data-color=yellow] {
+          background: #777722; }
+        .controls .color .shades .shade.shade-17[data-color=green] {
+          background: #227722; }
+        .controls .color .shades .shade.shade-17[data-color=aqua] {
+          background: #227777; }
+        .controls .color .shades .shade.shade-17[data-color=blue] {
+          background: #222288; }
+        .controls .color .shades .shade.shade-17[data-color=purple] {
+          background: #772277; }
+        .controls .color .shades .shade.shade-17[data-color=pink] {
+          background: #774444; }
+        .controls .color .shades .shade.shade-17[data-color=brown] {
+          background: #663311; }
+        .controls .color .shades .shade.shade-17[data-color=white] {
+          background: #777777; }
+        .controls .color .shades .shade.shade-18[data-color=red] {
+          background: #7e2424; }
+        .controls .color .shades .shade.shade-18[data-color=orange] {
+          background: #7e4824; }
+        .controls .color .shades .shade.shade-18[data-color=yellow] {
+          background: #7e7e24; }
+        .controls .color .shades .shade.shade-18[data-color=green] {
+          background: #247e24; }
+        .controls .color .shades .shade.shade-18[data-color=aqua] {
+          background: #247e7e; }
+        .controls .color .shades .shade.shade-18[data-color=blue] {
+          background: #242490; }
+        .controls .color .shades .shade.shade-18[data-color=purple] {
+          background: #7e247e; }
+        .controls .color .shades .shade.shade-18[data-color=pink] {
+          background: #7e4848; }
+        .controls .color .shades .shade.shade-18[data-color=brown] {
+          background: #6c3612; }
+        .controls .color .shades .shade.shade-18[data-color=white] {
+          background: #7e7e7e; }
+        .controls .color .shades .shade.shade-19[data-color=red] {
+          background: #852626; }
+        .controls .color .shades .shade.shade-19[data-color=orange] {
+          background: #854c26; }
+        .controls .color .shades .shade.shade-19[data-color=yellow] {
+          background: #858526; }
+        .controls .color .shades .shade.shade-19[data-color=green] {
+          background: #268526; }
+        .controls .color .shades .shade.shade-19[data-color=aqua] {
+          background: #268585; }
+        .controls .color .shades .shade.shade-19[data-color=blue] {
+          background: #262698; }
+        .controls .color .shades .shade.shade-19[data-color=purple] {
+          background: #852685; }
+        .controls .color .shades .shade.shade-19[data-color=pink] {
+          background: #854c4c; }
+        .controls .color .shades .shade.shade-19[data-color=brown] {
+          background: #723913; }
+        .controls .color .shades .shade.shade-19[data-color=white] {
+          background: #858585; }
+        .controls .color .shades .shade.shade-20[data-color=red] {
+          background: #8c2828; }
+        .controls .color .shades .shade.shade-20[data-color=orange] {
+          background: #8c5028; }
+        .controls .color .shades .shade.shade-20[data-color=yellow] {
+          background: #8c8c28; }
+        .controls .color .shades .shade.shade-20[data-color=green] {
+          background: #288c28; }
+        .controls .color .shades .shade.shade-20[data-color=aqua] {
+          background: #288c8c; }
+        .controls .color .shades .shade.shade-20[data-color=blue] {
+          background: #2828a0; }
+        .controls .color .shades .shade.shade-20[data-color=purple] {
+          background: #8c288c; }
+        .controls .color .shades .shade.shade-20[data-color=pink] {
+          background: #8c5050; }
+        .controls .color .shades .shade.shade-20[data-color=brown] {
+          background: #783c14; }
+        .controls .color .shades .shade.shade-20[data-color=white] {
+          background: #8c8c8c; }
+        .controls .color .shades .shade.shade-21[data-color=red] {
+          background: #932a2a; }
+        .controls .color .shades .shade.shade-21[data-color=orange] {
+          background: #93542a; }
+        .controls .color .shades .shade.shade-21[data-color=yellow] {
+          background: #93932a; }
+        .controls .color .shades .shade.shade-21[data-color=green] {
+          background: #2a932a; }
+        .controls .color .shades .shade.shade-21[data-color=aqua] {
+          background: #2a9393; }
+        .controls .color .shades .shade.shade-21[data-color=blue] {
+          background: #2a2aa8; }
+        .controls .color .shades .shade.shade-21[data-color=purple] {
+          background: #932a93; }
+        .controls .color .shades .shade.shade-21[data-color=pink] {
+          background: #935454; }
+        .controls .color .shades .shade.shade-21[data-color=brown] {
+          background: #7e3f15; }
+        .controls .color .shades .shade.shade-21[data-color=white] {
+          background: #939393; }
+        .controls .color .shades .shade.shade-22[data-color=red] {
+          background: #9a2c2c; }
+        .controls .color .shades .shade.shade-22[data-color=orange] {
+          background: #9a582c; }
+        .controls .color .shades .shade.shade-22[data-color=yellow] {
+          background: #9a9a2c; }
+        .controls .color .shades .shade.shade-22[data-color=green] {
+          background: #2c9a2c; }
+        .controls .color .shades .shade.shade-22[data-color=aqua] {
+          background: #2c9a9a; }
+        .controls .color .shades .shade.shade-22[data-color=blue] {
+          background: #2c2cb0; }
+        .controls .color .shades .shade.shade-22[data-color=purple] {
+          background: #9a2c9a; }
+        .controls .color .shades .shade.shade-22[data-color=pink] {
+          background: #9a5858; }
+        .controls .color .shades .shade.shade-22[data-color=brown] {
+          background: #844216; }
+        .controls .color .shades .shade.shade-22[data-color=white] {
+          background: #9a9a9a; }
+        .controls .color .shades .shade.shade-23[data-color=red] {
+          background: #a12e2e; }
+        .controls .color .shades .shade.shade-23[data-color=orange] {
+          background: #a15c2e; }
+        .controls .color .shades .shade.shade-23[data-color=yellow] {
+          background: #a1a12e; }
+        .controls .color .shades .shade.shade-23[data-color=green] {
+          background: #2ea12e; }
+        .controls .color .shades .shade.shade-23[data-color=aqua] {
+          background: #2ea1a1; }
+        .controls .color .shades .shade.shade-23[data-color=blue] {
+          background: #2e2eb8; }
+        .controls .color .shades .shade.shade-23[data-color=purple] {
+          background: #a12ea1; }
+        .controls .color .shades .shade.shade-23[data-color=pink] {
+          background: #a15c5c; }
+        .controls .color .shades .shade.shade-23[data-color=brown] {
+          background: #8a4517; }
+        .controls .color .shades .shade.shade-23[data-color=white] {
+          background: #a1a1a1; }
+        .controls .color .shades .shade.shade-24[data-color=red] {
+          background: #a83030; }
+        .controls .color .shades .shade.shade-24[data-color=orange] {
+          background: #a86030; }
+        .controls .color .shades .shade.shade-24[data-color=yellow] {
+          background: #a8a830; }
+        .controls .color .shades .shade.shade-24[data-color=green] {
+          background: #30a830; }
+        .controls .color .shades .shade.shade-24[data-color=aqua] {
+          background: #30a8a8; }
+        .controls .color .shades .shade.shade-24[data-color=blue] {
+          background: #3030c0; }
+        .controls .color .shades .shade.shade-24[data-color=purple] {
+          background: #a830a8; }
+        .controls .color .shades .shade.shade-24[data-color=pink] {
+          background: #a86060; }
+        .controls .color .shades .shade.shade-24[data-color=brown] {
+          background: #904818; }
+        .controls .color .shades .shade.shade-24[data-color=white] {
+          background: #a8a8a8; }
+        .controls .color .shades .shade.shade-25[data-color=red] {
+          background: #af3232; }
+        .controls .color .shades .shade.shade-25[data-color=orange] {
+          background: #af6432; }
+        .controls .color .shades .shade.shade-25[data-color=yellow] {
+          background: #afaf32; }
+        .controls .color .shades .shade.shade-25[data-color=green] {
+          background: #32af32; }
+        .controls .color .shades .shade.shade-25[data-color=aqua] {
+          background: #32afaf; }
+        .controls .color .shades .shade.shade-25[data-color=blue] {
+          background: #3232c8; }
+        .controls .color .shades .shade.shade-25[data-color=purple] {
+          background: #af32af; }
+        .controls .color .shades .shade.shade-25[data-color=pink] {
+          background: #af6464; }
+        .controls .color .shades .shade.shade-25[data-color=brown] {
+          background: #964b19; }
+        .controls .color .shades .shade.shade-25[data-color=white] {
+          background: #afafaf; }
+        .controls .color .shades .shade.shade-26[data-color=red] {
+          background: #b63434; }
+        .controls .color .shades .shade.shade-26[data-color=orange] {
+          background: #b66834; }
+        .controls .color .shades .shade.shade-26[data-color=yellow] {
+          background: #b6b634; }
+        .controls .color .shades .shade.shade-26[data-color=green] {
+          background: #34b634; }
+        .controls .color .shades .shade.shade-26[data-color=aqua] {
+          background: #34b6b6; }
+        .controls .color .shades .shade.shade-26[data-color=blue] {
+          background: #3434d0; }
+        .controls .color .shades .shade.shade-26[data-color=purple] {
+          background: #b634b6; }
+        .controls .color .shades .shade.shade-26[data-color=pink] {
+          background: #b66868; }
+        .controls .color .shades .shade.shade-26[data-color=brown] {
+          background: #9c4e1a; }
+        .controls .color .shades .shade.shade-26[data-color=white] {
+          background: #b6b6b6; }
+        .controls .color .shades .shade.shade-27[data-color=red] {
+          background: #bd3636; }
+        .controls .color .shades .shade.shade-27[data-color=orange] {
+          background: #bd6c36; }
+        .controls .color .shades .shade.shade-27[data-color=yellow] {
+          background: #bdbd36; }
+        .controls .color .shades .shade.shade-27[data-color=green] {
+          background: #36bd36; }
+        .controls .color .shades .shade.shade-27[data-color=aqua] {
+          background: #36bdbd; }
+        .controls .color .shades .shade.shade-27[data-color=blue] {
+          background: #3636d8; }
+        .controls .color .shades .shade.shade-27[data-color=purple] {
+          background: #bd36bd; }
+        .controls .color .shades .shade.shade-27[data-color=pink] {
+          background: #bd6c6c; }
+        .controls .color .shades .shade.shade-27[data-color=brown] {
+          background: #a2511b; }
+        .controls .color .shades .shade.shade-27[data-color=white] {
+          background: #bdbdbd; }
+        .controls .color .shades .shade.shade-28[data-color=red] {
+          background: #c43838; }
+        .controls .color .shades .shade.shade-28[data-color=orange] {
+          background: #c47038; }
+        .controls .color .shades .shade.shade-28[data-color=yellow] {
+          background: #c4c438; }
+        .controls .color .shades .shade.shade-28[data-color=green] {
+          background: #38c438; }
+        .controls .color .shades .shade.shade-28[data-color=aqua] {
+          background: #38c4c4; }
+        .controls .color .shades .shade.shade-28[data-color=blue] {
+          background: #3838e0; }
+        .controls .color .shades .shade.shade-28[data-color=purple] {
+          background: #c438c4; }
+        .controls .color .shades .shade.shade-28[data-color=pink] {
+          background: #c47070; }
+        .controls .color .shades .shade.shade-28[data-color=brown] {
+          background: #a8541c; }
+        .controls .color .shades .shade.shade-28[data-color=white] {
+          background: #c4c4c4; }
+        .controls .color .shades .shade.shade-29[data-color=red] {
+          background: #cb3a3a; }
+        .controls .color .shades .shade.shade-29[data-color=orange] {
+          background: #cb743a; }
+        .controls .color .shades .shade.shade-29[data-color=yellow] {
+          background: #cbcb3a; }
+        .controls .color .shades .shade.shade-29[data-color=green] {
+          background: #3acb3a; }
+        .controls .color .shades .shade.shade-29[data-color=aqua] {
+          background: #3acbcb; }
+        .controls .color .shades .shade.shade-29[data-color=blue] {
+          background: #3a3ae8; }
+        .controls .color .shades .shade.shade-29[data-color=purple] {
+          background: #cb3acb; }
+        .controls .color .shades .shade.shade-29[data-color=pink] {
+          background: #cb7474; }
+        .controls .color .shades .shade.shade-29[data-color=brown] {
+          background: #ae571d; }
+        .controls .color .shades .shade.shade-29[data-color=white] {
+          background: #cbcbcb; }
+        .controls .color .shades .shade.shade-30[data-color=red] {
+          background: #d23c3c; }
+        .controls .color .shades .shade.shade-30[data-color=orange] {
+          background: #d2783c; }
+        .controls .color .shades .shade.shade-30[data-color=yellow] {
+          background: #d2d23c; }
+        .controls .color .shades .shade.shade-30[data-color=green] {
+          background: #3cd23c; }
+        .controls .color .shades .shade.shade-30[data-color=aqua] {
+          background: #3cd2d2; }
+        .controls .color .shades .shade.shade-30[data-color=blue] {
+          background: #3c3cf0; }
+        .controls .color .shades .shade.shade-30[data-color=purple] {
+          background: #d23cd2; }
+        .controls .color .shades .shade.shade-30[data-color=pink] {
+          background: #d27878; }
+        .controls .color .shades .shade.shade-30[data-color=brown] {
+          background: #b45a1e; }
+        .controls .color .shades .shade.shade-30[data-color=white] {
+          background: #d2d2d2; }
+        .controls .color .shades .shade.shade-31[data-color=red] {
+          background: #d93e3e; }
+        .controls .color .shades .shade.shade-31[data-color=orange] {
+          background: #d97c3e; }
+        .controls .color .shades .shade.shade-31[data-color=yellow] {
+          background: #d9d93e; }
+        .controls .color .shades .shade.shade-31[data-color=green] {
+          background: #3ed93e; }
+        .controls .color .shades .shade.shade-31[data-color=aqua] {
+          background: #3ed9d9; }
+        .controls .color .shades .shade.shade-31[data-color=blue] {
+          background: #3e3ef8; }
+        .controls .color .shades .shade.shade-31[data-color=purple] {
+          background: #d93ed9; }
+        .controls .color .shades .shade.shade-31[data-color=pink] {
+          background: #d97c7c; }
+        .controls .color .shades .shade.shade-31[data-color=brown] {
+          background: #ba5d1f; }
+        .controls .color .shades .shade.shade-31[data-color=white] {
+          background: #d9d9d9; }
+        .controls .color .shades .shade.shade-32[data-color=red] {
+          background: #e04040; }
+        .controls .color .shades .shade.shade-32[data-color=orange] {
+          background: #e08040; }
+        .controls .color .shades .shade.shade-32[data-color=yellow] {
+          background: #e0e040; }
+        .controls .color .shades .shade.shade-32[data-color=green] {
+          background: #40e040; }
+        .controls .color .shades .shade.shade-32[data-color=aqua] {
+          background: #40e0e0; }
+        .controls .color .shades .shade.shade-32[data-color=blue] {
+          background: #4040ff; }
+        .controls .color .shades .shade.shade-32[data-color=purple] {
+          background: #e040e0; }
+        .controls .color .shades .shade.shade-32[data-color=pink] {
+          background: #e08080; }
+        .controls .color .shades .shade.shade-32[data-color=brown] {
+          background: #c06020; }
+        .controls .color .shades .shade.shade-32[data-color=white] {
+          background: #e0e0e0; }
+  .controls .brush {
+    margin-top: 15px;
+    width: 120px;
+    height: 100px;
+    background: #eee;
+    box-shadow: 0 0 5px #c0c0c0; }
+    .controls .brush .sizes {
+      width: 120px;
+      height: 40px; }
+      .controls .brush .sizes .size {
+        width: 40px;
+        height: 40px;
+        background: #000;
+        display: block;
+        float: left;
+        font-size: 5px;
+        line-height: 40px;
+        position: relative;
+        text-align: center; }
+        .controls .brush .sizes .size::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #eee;
+          transition: all .5s;
+          -webkit-clip-path: circle(0% at 50% 50%);
+          clip-path: circle(0% at 50% 50%); }
+        .controls .brush .sizes .size:hover {
+          cursor: pointer; }
+        .controls .brush .sizes .size[data-size=sm] {
+          -webkit-clip-path: circle(15% at 50% 50%);
+          clip-path: circle(15% at 50% 50%); }
+          .controls .brush .sizes .size[data-size=sm].selected::after {
+            -webkit-clip-path: circle(10% at 50% 50%);
+            clip-path: circle(10% at 50% 50%); }
+        .controls .brush .sizes .size[data-size=md] {
+          -webkit-clip-path: circle(25% at 50% 50%);
+          clip-path: circle(25% at 50% 50%); }
+          .controls .brush .sizes .size[data-size=md].selected::after {
+            -webkit-clip-path: circle(10% at 50% 50%);
+            clip-path: circle(10% at 50% 50%); }
+        .controls .brush .sizes .size[data-size=lg] {
+          -webkit-clip-path: circle(35% at 50% 50%);
+          clip-path: circle(35% at 50% 50%); }
+          .controls .brush .sizes .size[data-size=lg].selected::after {
+            -webkit-clip-path: circle(10% at 50% 50%);
+            clip-path: circle(10% at 50% 50%); }
+
+.cursors {
+  position: relative; }
+  .cursors .cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%); }
+    .cursors .cursor::after {
+      content: attr(data-name);
+      font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
+      text-transform: uppercase;
+      font-size: 12px;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      line-height: 10px;
+      left: 100%;
+      text-shadow: 1px 1px 0 #fff; }
+
+.menu {
+  position: fixed;
+  width: 120px;
+  height: 200px;
+  background: #fff;
+  box-shadow: 0 0 5px 2px #bbb;
+  /*   border-radius: 15px; */ }
+  .menu .menu--item {
+    width: 100%;
+    height: 40px;
+    font-family: 'Segoe UI';
+    font-weight: 500;
+    text-align: center;
+    line-height: 40px; }
+    .menu .menu--item:hover {
+      cursor: pointer;
+      background: #eee; }

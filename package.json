@@ -1,0 +1,34 @@
+{
+  "name": "node-draw",
+  "version": "0.0.1",
+  "description": "A multiplayer drawing pad.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacegeek224/node-draw.git"
+  },
+  "keywords": [
+    "draw"
+  ],
+  "author": "Maris Usis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spacegeek224/node-draw/issues"
+  },
+  "homepage": "https://github.com/spacegeek224/node-draw#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "jade": "^1.11.0",
+    "katex": "^0.6.0",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-sass": "^2.3.2"
+  }
+}
