@@ -1,8 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var jade = require('gulp-jade');
-var jade = require('jade');
 var gulpJade = require('gulp-jade');
+var jade = require('jade');
 var katex = require('katex');
 
 gulp.task('jade', function() {
@@ -11,12 +10,7 @@ gulp.task('jade', function() {
       jade: jade,
       pretty: true
     }))
-    .pipe(gulp.dest('client/'))
-})
-
-gulp.task('default', function() {
-  // place code for your default task here
-  console.log("Default gulp task");
+    .pipe(gulp.dest('client/'));
 });
 
 gulp.task('sass', function() {
@@ -28,3 +22,6 @@ gulp.task('sass', function() {
 gulp.task('sass:watch', function() {
   gulp.watch('./client/scss/**/*.scss', ['sass']);
 });
+
+
+gulp.task('default', ['jade', 'sass']);
