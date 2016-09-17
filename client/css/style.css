@@ -1,5 +1,7 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-xbox-sizing: border-box; }
 
 body {
   user-select: none; }
@@ -49,8 +51,10 @@ body {
         width: 24px;
         height: 24px;
         position: relative;
+        -moz-clip-path: circle(25% at 50% 50%);
         -webkit-clip-path: circle(25% at 50% 50%);
-        clip-path: circle(25% at 50% 50%); }
+        clip-path: circle(25% at 50% 50%);
+        clip: circle(25% at 50% 50%); }
         .controls .color .hues .hue::after {
           content: '';
           position: absolute;
@@ -768,28 +772,42 @@ body {
           height: 100%;
           background: #eee;
           transition: all .5s;
+          -moz-clip-path: circle(0% at 50% 50%);
           -webkit-clip-path: circle(0% at 50% 50%);
-          clip-path: circle(0% at 50% 50%); }
+          clip-path: circle(0% at 50% 50%);
+          clip: circle(0% at 50% 50%); }
         .controls .brush .sizes .size:hover {
           cursor: pointer; }
         .controls .brush .sizes .size[data-size=sm] {
+          -moz-clip-path: circle(15% at 50% 50%);
           -webkit-clip-path: circle(15% at 50% 50%);
-          clip-path: circle(15% at 50% 50%); }
+          clip-path: circle(15% at 50% 50%);
+          clip: circle(15% at 50% 50%); }
           .controls .brush .sizes .size[data-size=sm].selected::after {
+            -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%);
+            clip: circle(10% at 50% 50%); }
         .controls .brush .sizes .size[data-size=md] {
+          -moz-clip-path: circle(25% at 50% 50%);
           -webkit-clip-path: circle(25% at 50% 50%);
-          clip-path: circle(25% at 50% 50%); }
+          clip-path: circle(25% at 50% 50%);
+          clip: circle(25% at 50% 50%); }
           .controls .brush .sizes .size[data-size=md].selected::after {
+            -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%);
+            clip: circle(10% at 50% 50%); }
         .controls .brush .sizes .size[data-size=lg] {
+          -moz-clip-path: circle(35% at 50% 50%);
           -webkit-clip-path: circle(35% at 50% 50%);
-          clip-path: circle(35% at 50% 50%); }
+          clip-path: circle(35% at 50% 50%);
+          clip: circle(35% at 50% 50%); }
           .controls .brush .sizes .size[data-size=lg].selected::after {
+            -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%);
+            clip: circle(10% at 50% 50%); }
 
 .cursors {
   position: relative; }
@@ -798,8 +816,10 @@ body {
     width: 10px;
     height: 10px;
     background: #000;
+    -moz-clip-path: circle(50% at 50% 50%);
     -webkit-clip-path: circle(50% at 50% 50%);
-    clip-path: circle(50% at 50% 50%); }
+    clip-path: circle(50% at 50% 50%);
+    clip: circle(50% at 50% 50%); }
     .cursors .cursor::after {
       content: attr(data-name);
       font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;

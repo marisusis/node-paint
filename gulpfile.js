@@ -16,7 +16,7 @@ gulp.task('jade', function() {
 gulp.task('sass', function() {
   return gulp.src('./client/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./client/css'));
+    .pipe(gulp.dest('./client/css/'));
 });
 
 gulp.task('sass:watch', function() {

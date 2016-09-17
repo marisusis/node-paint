@@ -5,6 +5,7 @@
     <title>Drawing Pad 2.0</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="css/normalize.css"/>
+    <script src="js/jquery.min.js"></script>
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans|Montserrat"/>
     <link rel="stylesheet" href="css/style.css"/>
   </head>
@@ -14,7 +15,7 @@
       <canvas id="cfg"></canvas>
     </div>
     <div class="controls">
-      <div class="color">
+      <div class="color"> 
         <div class="shades">
           <div data-color="red" class="shade shade-1"></div>
           <div data-color="red" class="shade shade-2"></div>
@@ -77,7 +78,6 @@
       <div data-item="save" class="menu--item">SAVE</div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

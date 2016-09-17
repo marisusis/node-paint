@@ -1,256 +1,289 @@
 @mixin clip-path($a,$b,$c) {
-  -webkit-clip-path: circle($a at $b $c);
-  clip-path: circle($a at $b $c);
-
+    -moz-clip-path: circle($a at $b $c);
+    -webkit-clip-path: circle($a at $b $c);
+    clip-path: circle($a at $b $c);
 }
-
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
-
-$colorl:(red,orange,yellow,green,aqua,blue,purple,pink,brown,white);
+$colorl: (red,orange,yellow,green,aqua,blue,purple,pink,brown,white);
 $colorm: (red: #e04040,orange:#e08040,yellow:#e0e040,green:#40e040,aqua:#40e0e0,blue:#4040ff,purple:#e040e0,pink:#e08080,brown:#c06020,white:#e0e0e0);
 
 body {
-  user-select: none;
+    user-select: none;
 }
 
 .editor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    cursor: none;
-    background: transparent;
-    #cfg {
-      z-index: 10;
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+        background: transparent;
+
+        #cfg {
+            z-index: 10;
+        }
     }
-  }
 }
 
 .controls {
-  width: 140px;
-  height: 100%;
-  position: fixed;
-  right: 0;
-  background: transparent;
-  bottom: 0;
-  padding: 10px;
-  z-index: 100;
-  .color {
-    width: 120px;
-    height: 328px;
-    background: #eee;
-    box-shadow: 0 0 5px #c0c0c0;
-    .current {
-      width: 100%;
-      height: 40px;
-      background: #000;
-      transition: all .5s;
-    }
-    .hues {
-      width: 120px;
-      height: 48px;
-      .hue {
-        display: block;
-        float: left;
-        width: 24px;
-        height: 24px;
-        position: relative;
-        @include clip-path(25%, 50%, 50%);
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          max-width: 0;
-          background: rgba(0,0,0,0.3);
-          transition: all .5s;
-        }
-        &:hover {
-          cursor: pointer;
-          &::after {
-            max-width: 100%;
-            max-height: 100%;
-          }
-        }
-        &.selected {
-          &::after {
-            max-width: 100%;
-            max-height: 100%;
-          }
-        }
-        @for $i from 1 through 10 {
-          &.hue-#{$i} {
-            background: map-get($colorm,nth($colorl,$i));
-          }
-        }
-      }
-    }
-    .shades {
-      width: 120px;
-      height: 240px;
-      .shade {
-        transition: all .3s;
-        display: block;
-        float: left;
-        width: 30px;
-        height: 30px;
-        &:hover {
-          cursor: crosshair;
-        }
-        @for $i from 1 through 32 {
-          &.shade-#{$i} {
-            &[data-color=red] {
-              background: rgb(7*$i,2*$i,2*$i);
-            }
-            &[data-color=orange] {
-              background: rgb(7*$i,4*$i,2*$i);
-            }
-            &[data-color=yellow] {
-              background: rgb(7*$i,7*$i,2*$i);
-            }
-            &[data-color=green] {
-              background: rgb(2*$i,7*$i,2*$i);
-            }
-            &[data-color=aqua] {
-              background: rgb(2*$i,7*$i,7*$i);
-            }
-            &[data-color=blue] {
-              background: rgb(2*$i,2*$i,8*$i);
-            }
-            &[data-color=purple] {
-              background: rgb(7*$i,2*$i,7*$i);
-            }
-            &[data-color=pink] {
-              background: rgb(7*$i,4*$i,4*$i);
-            }
-            &[data-color=brown] {
-              background: rgb(6*$i,3*$i,1*$i);
-            }
-            &[data-color=white] {
-              background: rgb(7*$i,7*$i,7*$i);
-            }
-          }
-        }
-      }
-    }
-  }
-  .brush {
-    margin-top: 15px;
-    width: 120px;
-    height: 100px;
-    background: #eee;
-    box-shadow: 0 0 5px #c0c0c0;
-    .sizes {
-      width: 120px;
-      height: 40px;
-      .size {
-        width: 40px;
-        height: 40px;
-        background: #000;
-        display: block;
-        float: left;
-        font-size: 5px;
-        line-height: 40px;
-        position: relative;
-        text-align: center;
-        &::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: #eee;
-          transition: all .5s;
-          @include clip-path(0%, 50%, 50%);
-        }
-        &:hover {
-          cursor: pointer;
-        }
-        &[data-size=sm] {
-          @include clip-path(15%, 50%, 50%);
-          &.selected {
-            &::after {
-              @include clip-path(10%, 50%, 50%);
-            }
-          }
-        }
-        &[data-size=md] {
-          @include clip-path(25%, 50%, 50%);
-          &.selected {
+    width: 140px;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    background: transparent;
+    bottom: 0;
+    padding: 10px;
+    z-index: 100;
 
-            &::after {
-              @include clip-path(10%, 50%, 50%);
-            }
-          }
-        }
-        &[data-size=lg] {
-          @include clip-path(35%, 50%, 50%);
+    .color {
+        width: 120px;
+        height: 328px;
+        background: #eee;
+        box-shadow: 0 0 5px #c0c0c0;
 
-          &.selected {
-            &::after {
-              @include clip-path(10%, 50%, 50%);
-            }
-          }
+        .current {
+            width: 100%;
+            height: 40px;
+            background: #000;
+            transition: all 0.5s;
         }
-      }
+
+        .hues {
+            width: 120px;
+            height: 48px;
+
+            .hue {
+                display: block;
+                float: left;
+                width: 24px;
+                height: 24px;
+                position: relative;
+                @include clip-path(25%, 50%, 50%);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    max-width: 0;
+                    background: rgba(0,0,0,0.3);
+                    transition: all 0.5s;
+                }
+
+                &:hover {
+                    cursor: pointer;
+
+                    &::after {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+
+                &.selected {
+                    &::after {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+                @for $i from 1 through 10 {
+                    &.hue-#{$i} {
+                        background: map-get($colorm,nth($colorl,$i));
+                    }
+                }
+            }
+        }
+
+        .shades {
+            width: 120px;
+            height: 240px;
+
+            .shade {
+                transition: all 0.3s;
+                display: block;
+                float: left;
+                width: 30px;
+                height: 30px;
+
+                &:hover {
+                    cursor: crosshair;
+                }
+                @for $i from 1 through 32 {
+                    &.shade-#{$i} {
+                        &[data-color=red] {
+                            background: rgb(7*$i,2*$i,2*$i);
+                        }
+
+                        &[data-color=orange] {
+                            background: rgb(7*$i,4*$i,2*$i);
+                        }
+
+                        &[data-color=yellow] {
+                            background: rgb(7*$i,7*$i,2*$i);
+                        }
+
+                        &[data-color=green] {
+                            background: rgb(2*$i,7*$i,2*$i);
+                        }
+
+                        &[data-color=aqua] {
+                            background: rgb(2*$i,7*$i,7*$i);
+                        }
+
+                        &[data-color=blue] {
+                            background: rgb(2*$i,2*$i,8*$i);
+                        }
+
+                        &[data-color=purple] {
+                            background: rgb(7*$i,2*$i,7*$i);
+                        }
+
+                        &[data-color=pink] {
+                            background: rgb(7*$i,4*$i,4*$i);
+                        }
+
+                        &[data-color=brown] {
+                            background: rgb(6*$i,3*$i,1*$i);
+                        }
+
+                        &[data-color=white] {
+                            background: rgb(7*$i,7*$i,7*$i);
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
+
+    .brush {
+        margin-top: 15px;
+        width: 120px;
+        height: 100px;
+        background: #eee;
+        box-shadow: 0 0 5px #c0c0c0;
+
+        .sizes {
+            width: 120px;
+            height: 40px;
+
+            .size {
+                width: 40px;
+                height: 40px;
+                background: #000;
+                display: block;
+                float: left;
+                font-size: 5px;
+                line-height: 40px;
+                position: relative;
+                text-align: center;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: #eee;
+                    transition: all 0.5s;
+                    @include clip-path(0%, 50%, 50%);
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &[data-size=sm] {
+                    @include clip-path(15%, 50%, 50%);
+
+                    &.selected {
+                        &::after {
+                            @include clip-path(10%, 50%, 50%);
+                        }
+                    }
+                }
+
+                &[data-size=md] {
+                    @include clip-path(25%, 50%, 50%);
+
+                    &.selected {
+                        &::after {
+                            @include clip-path(10%, 50%, 50%);
+                        }
+                    }
+                }
+
+                &[data-size=lg] {
+                    @include clip-path(35%, 50%, 50%);
+
+                    &.selected {
+                        &::after {
+                            @include clip-path(10%, 50%, 50%);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .cursors {
-  position: relative;
-  .cursor {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #000;
-    @include clip-path(50%, 50%, 50%);
-    &::after {
-      content: attr(data-name);
-      font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
-      text-transform: uppercase;
-      font-size: 12px;
-      position: absolute;
-      top: 0;
-      height: 100%;
-      line-height: 10px;
-      left: 100%;
-      text-shadow: 1px 1px 0 #fff;
+    position: relative;
 
+    .cursor {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #000;
+        @include clip-path(50%, 50%, 50%);
+
+        &::after {
+            content: attr(data-name);
+            font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            line-height: 10px;
+            left: 100%;
+            text-shadow: 1px 1px 0 #fff;
+        }
     }
-  }
 }
 
 .menu {
-  position: fixed;
-  width: 120px;
-  height: 200px;
-  background: #fff;
-  box-shadow: 0 0 5px 2px #bbb;
-/*   border-radius: 15px; */
-  .menu--item {
-    width: 100%;
-    height: 40px;
-    font-family: 'Segoe UI';
-    font-weight: 500;
-    text-align: center;
-    line-height: 40px;
-    &:hover {
-      cursor: pointer;
-      background: #eee;
+    position: fixed;
+    width: 120px;
+    height: 200px;
+    background: #fff;
+    box-shadow: 0 0 5px 2px #bbb;
+    /*   border-radius: 15px; */
+    .menu--item {
+        width: 100%;
+        height: 40px;
+        font-family: 'Segoe UI';
+        font-weight: 500;
+        text-align: center;
+        line-height: 40px;
+
+        &:hover {
+            cursor: pointer;
+            background: #eee;
+        }
     }
-  }
 }

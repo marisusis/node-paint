@@ -6,6 +6,7 @@ html
     title Drawing Pad 2.0
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='css/normalize.css')
+    script(src='js/jquery.min.js')
     link(rel='stylesheet prefetch', href='https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans|Montserrat')
     link(rel='stylesheet', href='css/style.css')
   body
@@ -13,7 +14,7 @@ html
       canvas#cdraw
       canvas#cfg
     .controls
-      .color
+      .color 
         .shades
           - for (var i=0;i<32;i++)
             .shade(class='shade-'+(i+1),data-color=colors[0])
@@ -32,5 +33,4 @@ html
       .menu--item(data-item='save') SAVE
       //- .menu--item QUIT
     script(src='/socket.io/socket.io.js')
-    script(src='js/jquery.min.js')
     script(src='js/index.js')
