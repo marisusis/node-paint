@@ -72,6 +72,7 @@ body {
                 height: 24px;
                 position: relative;
                 @include clip-path(25%, 50%, 50%);
+                transition: all 0.5s;
 
                 &::after {
                     content: '';
@@ -87,16 +88,19 @@ body {
 
                 &:hover {
                     cursor: pointer;
+                    @include clip-path(30%, 50%, 50%);
 
                     &::after {
-                        max-width: 100%;
+                        max-width: 0;
                         max-height: 100%;
                     }
                 }
 
                 &.selected {
+                  @include clip-path(15%, 50%, 50%);
+
                     &::after {
-                        max-width: 100%;
+                        max-width: 0;
                         max-height: 100%;
                     }
                 }
@@ -118,9 +122,11 @@ body {
                 float: left;
                 width: 30px;
                 height: 30px;
+                transform: scale(1);
 
                 &:hover {
                     cursor: crosshair;
+                    transform: scale(0.9);
                 }
                 @for $i from 1 through 32 {
                     &.shade-#{$i} {
@@ -249,9 +255,10 @@ body {
         width: 10px;
         height: 10px;
         background: #000;
-        @include clip-path(50%, 50%, 50%);
+        border: solid 1px #fff;
+        border-radius: 200%;
 
-        &::after {
+      /*  &::after {
             content: attr(data-name);
             font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
             text-transform: uppercase;
@@ -262,7 +269,16 @@ body {
             line-height: 10px;
             left: 100%;
             text-shadow: 1px 1px 0 #fff;
-        }
+        }*/
+    }
+    .mycursor {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border: solid 1px #fff;
+      border-radius: 200%;
+      user-select: none;
     }
 }
 

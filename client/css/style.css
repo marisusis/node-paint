@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -webkit-xbox-sizing: border-box; }
+  -webkit-box-sizing: border-box; }
 
 body {
   user-select: none; }
@@ -41,7 +41,7 @@ body {
       width: 100%;
       height: 40px;
       background: #000;
-      transition: all .5s; }
+      transition: all 0.5s; }
     .controls .color .hues {
       width: 120px;
       height: 48px; }
@@ -54,7 +54,7 @@ body {
         -moz-clip-path: circle(25% at 50% 50%);
         -webkit-clip-path: circle(25% at 50% 50%);
         clip-path: circle(25% at 50% 50%);
-        clip: circle(25% at 50% 50%); }
+        transition: all 0.5s; }
         .controls .color .hues .hue::after {
           content: '';
           position: absolute;
@@ -64,15 +64,22 @@ body {
           height: 100%;
           max-width: 0;
           background: rgba(0, 0, 0, 0.3);
-          transition: all .5s; }
+          transition: all 0.5s; }
         .controls .color .hues .hue:hover {
-          cursor: pointer; }
+          cursor: pointer;
+          -moz-clip-path: circle(30% at 50% 50%);
+          -webkit-clip-path: circle(30% at 50% 50%);
+          clip-path: circle(30% at 50% 50%); }
           .controls .color .hues .hue:hover::after {
-            max-width: 100%;
+            max-width: 0;
             max-height: 100%; }
-        .controls .color .hues .hue.selected::after {
-          max-width: 100%;
-          max-height: 100%; }
+        .controls .color .hues .hue.selected {
+          -moz-clip-path: circle(15% at 50% 50%);
+          -webkit-clip-path: circle(15% at 50% 50%);
+          clip-path: circle(15% at 50% 50%); }
+          .controls .color .hues .hue.selected::after {
+            max-width: 0;
+            max-height: 100%; }
         .controls .color .hues .hue.hue-1 {
           background: #e04040; }
         .controls .color .hues .hue.hue-2 {
@@ -97,13 +104,15 @@ body {
       width: 120px;
       height: 240px; }
       .controls .color .shades .shade {
-        transition: all .3s;
+        transition: all 0.3s;
         display: block;
         float: left;
         width: 30px;
-        height: 30px; }
+        height: 30px;
+        transform: scale(1); }
         .controls .color .shades .shade:hover {
-          cursor: crosshair; }
+          cursor: crosshair;
+          transform: scale(0.9); }
         .controls .color .shades .shade.shade-1[data-color=red] {
           background: #070202; }
         .controls .color .shades .shade.shade-1[data-color=orange] {
@@ -771,43 +780,36 @@ body {
           width: 100%;
           height: 100%;
           background: #eee;
-          transition: all .5s;
+          transition: all 0.5s;
           -moz-clip-path: circle(0% at 50% 50%);
           -webkit-clip-path: circle(0% at 50% 50%);
-          clip-path: circle(0% at 50% 50%);
-          clip: circle(0% at 50% 50%); }
+          clip-path: circle(0% at 50% 50%); }
         .controls .brush .sizes .size:hover {
           cursor: pointer; }
         .controls .brush .sizes .size[data-size=sm] {
           -moz-clip-path: circle(15% at 50% 50%);
           -webkit-clip-path: circle(15% at 50% 50%);
-          clip-path: circle(15% at 50% 50%);
-          clip: circle(15% at 50% 50%); }
+          clip-path: circle(15% at 50% 50%); }
           .controls .brush .sizes .size[data-size=sm].selected::after {
             -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%);
-            clip: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%); }
         .controls .brush .sizes .size[data-size=md] {
           -moz-clip-path: circle(25% at 50% 50%);
           -webkit-clip-path: circle(25% at 50% 50%);
-          clip-path: circle(25% at 50% 50%);
-          clip: circle(25% at 50% 50%); }
+          clip-path: circle(25% at 50% 50%); }
           .controls .brush .sizes .size[data-size=md].selected::after {
             -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%);
-            clip: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%); }
         .controls .brush .sizes .size[data-size=lg] {
           -moz-clip-path: circle(35% at 50% 50%);
           -webkit-clip-path: circle(35% at 50% 50%);
-          clip-path: circle(35% at 50% 50%);
-          clip: circle(35% at 50% 50%); }
+          clip-path: circle(35% at 50% 50%); }
           .controls .brush .sizes .size[data-size=lg].selected::after {
             -moz-clip-path: circle(10% at 50% 50%);
             -webkit-clip-path: circle(10% at 50% 50%);
-            clip-path: circle(10% at 50% 50%);
-            clip: circle(10% at 50% 50%); }
+            clip-path: circle(10% at 50% 50%); }
 
 .cursors {
   position: relative; }
@@ -816,21 +818,28 @@ body {
     width: 10px;
     height: 10px;
     background: #000;
-    -moz-clip-path: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
-    clip-path: circle(50% at 50% 50%);
-    clip: circle(50% at 50% 50%); }
-    .cursors .cursor::after {
-      content: attr(data-name);
-      font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
-      text-transform: uppercase;
-      font-size: 12px;
-      position: absolute;
-      top: 0;
-      height: 100%;
-      line-height: 10px;
-      left: 100%;
-      text-shadow: 1px 1px 0 #fff; }
+    border: solid 1px #fff;
+    border-radius: 200%;
+    /*  &::after {
+            content: attr(data-name);
+            font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            line-height: 10px;
+            left: 100%;
+            text-shadow: 1px 1px 0 #fff;
+        }*/ }
+  .cursors .mycursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border: solid 1px #fff;
+    border-radius: 200%;
+    user-select: none; }
 
 .menu {
   position: fixed;

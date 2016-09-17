@@ -5,8 +5,10 @@ var fg = document.getElementById('cfg');
 var fgctx = fg.getContext('2d');
 
 $(document).ready(function(e) {
-  while(!App.name) {
-    App.name = window.location.search.substr(1)||prompt("username");
+  fg.width = fg.clientWidth;
+  fg.height = fg.clientHeight;
+  while (!App.name) {
+    App.name = window.location.search.substr(1) || prompt("username");
   }
   socket.emit('join', {
     name: App.name
@@ -60,8 +62,8 @@ fg.width = canvas.clientWidth;
 fg.height = canvas.clientHeight;
 
 $('.editor').on('mousedown', function(e) {
-   $('.menu').css({
-    'display':'none'
+  $('.menu').css({
+    'display': 'none'
   });
   App.drawing = true;
   //   ctx.beginPath();
@@ -70,32 +72,40 @@ $('.editor').on('mousedown', function(e) {
   //   ctx.moveTo(e.pageX, e.pageY);
 });
 
-$('.editor').on('click',function(e) {
+$('.editor').on('click', function(e) {
   $('.menu').css({
-    'display':'none'
+    'display': 'none'
   });
 });
 
-$('.menu--item').on('click',function(e) {
+$('.menu--item').on('click', function(e) {
   Menu[$(e.target).attr('data-item')]();
   $('.menu').css({
-    'display':'none'
+    'display': 'none'
   });
 });
 
 $(document).contextmenu(function(e) {
   e.preventDefault();
-  showMenu(e.pageX,e.pageY);
+  showMenu(e.pageX, e.pageY);
 });
 
 $(document).on('mousemove', function(e) {
   fgctx.fillStyle = App.color;
+
   fgctx.clearRect(0, 0, fg.width, fg.height);
+  fgctx.beginPath();
+  fgctx.ellipse(e.pageX, e.pageY, 5, 5, 0, 0, 360);
+  fgctx.fill();
+  fgctx.closePath();
+  fgctx.beginPath();
+  fgctx.strokeStyle = "#ffffff";
+  fgctx.lineWidth = 2;
+  fgctx.ellipse(e.pageX, e.pageY, 6, 6, 0, 0, 360);
+  fgctx.stroke();
+  fgctx.closePath();
 
-  fgctx.fillRect(e.pageX - 4.5, e.pageY - 4.5, 10, 10);
-    fgctx.strokeRect(e.pageX - 5, e.pageY - 5, 11, 11);
-
-  if($.now() - lastEmit > 10) {
+  if ($.now() - lastEmit > 10) {
     socket.emit('mousemove', {
       'x': e.pageX,
       'y': e.pageY,
@@ -111,7 +121,7 @@ $(document).on('mousemove', function(e) {
 
 
 
-  if(App.drawing) {
+  if (App.drawing) {
     //     drawLine(prev.x, prev.y, e.pageX, e.pageY, App.color, App.lineWidth);
     ctx.beginPath();
     ctx.moveTo(prev.x, prev.y);
@@ -119,7 +129,7 @@ $(document).on('mousemove', function(e) {
     ctx.strokeStyle = App.color;
     ctx.lineWidth = App.lineWidth;
     ctx.shadowColor = App.color;
-//     ctx.shadowBlur = App.lineWidth + 10;
+    //     ctx.shadowBlur = App.lineWidth + 10;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.stroke();
@@ -152,7 +162,7 @@ function drawLine(fromx, fromy, tox, toy, color, width) {
   ctx.moveTo(fromx, fromy);
   ctx.lineTo(tox, toy);
   ctx.shadowColor = color;
-  ctx.shadowBlur = 15;
+  // ctx.shadowBlur = 15;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
   ctx.strokeStyle = color;
@@ -160,11 +170,11 @@ function drawLine(fromx, fromy, tox, toy, color, width) {
   ctx.stroke();
 }
 
-function showMenu(x,y) {
+function showMenu(x, y) {
   $('.menu').css({
-    'display':'block',
-    'left':x+'px',
-    'top':y+'px'
+    'display': 'block',
+    'left': x + 'px',
+    'top': y + 'px'
   })
 }
 
@@ -188,7 +198,7 @@ var lastEmit = $.now();
 //SOCKET
 
 socket.on('moving', function(data) {
-  if(!(data.id in clients)) {
+  if (!(data.id in clients)) {
     // a new user has come online. create a cursor for them
     cursors[data.id] = $('<div class="cursor">').appendTo('.cursors');
   }
@@ -196,12 +206,12 @@ socket.on('moving', function(data) {
   // Move the mouse pointer
   cursors[data.id].css({
     'background': data.color,
-    'left': data.x-4.5,
-    'top': data.y-4.5
-  }).attr('data-name',data.name);
+    'left': data.x - 4.5,
+    'top': data.y - 4.5
+  }).attr('data-name', data.name);
 
   // Is the user drawing?
-  if(data.drawing && clients[data.id]) {
+  if (data.drawing && clients[data.id]) {
 
     // Draw a line on the canvas. clients[data.id] holds
     // the previous position of this user's mouse pointer
