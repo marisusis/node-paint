@@ -93,18 +93,18 @@ $(document).contextmenu(function(e) {
 $(document).on('mousemove', function(e) {
   fgctx.fillStyle = App.color;
 
-  fgctx.clearRect(0, 0, fg.width, fg.height);
-  fgctx.beginPath();
-  fgctx.ellipse(e.pageX, e.pageY, 5, 5, 0, 0, 360);
-  fgctx.fill();
-  fgctx.closePath();
-  fgctx.beginPath();
-  fgctx.strokeStyle = "#ffffff";
-  fgctx.lineWidth = 2;
-  fgctx.ellipse(e.pageX, e.pageY, 6, 6, 0, 0, 360);
-  fgctx.stroke();
-  fgctx.closePath();
-
+  /*  fgctx.clearRect(0, 0, fg.width, fg.height);
+    fgctx.beginPath();
+    fgctx.ellipse(e.pageX, e.pageY, 5, 5, 0, 0, 360);
+    fgctx.fill();
+    fgctx.closePath();
+    fgctx.beginPath();
+    fgctx.strokeStyle = "#ffffff";
+    fgctx.lineWidth = 2;
+    fgctx.ellipse(e.pageX, e.pageY, 6, 6, 0, 0, 360);
+    fgctx.stroke();
+    fgctx.closePath();
+  */
   if ($.now() - lastEmit > 10) {
     socket.emit('mousemove', {
       'x': e.pageX,
@@ -152,6 +152,10 @@ window.onresize = function(e) {
   canvas.height = window.innerHeight;
   fg.width = window.innerWidth;
   fg.height = window.innerHeight;
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+  fg.width = canvas.clientWidth;
+  fg.height = canvas.clientHeight;
 };
 
 

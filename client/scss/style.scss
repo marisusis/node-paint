@@ -258,9 +258,9 @@ body {
         border: solid 1px #fff;
         border-radius: 200%;
 
-      /*  &::after {
+      &::after {
             content: attr(data-name);
-            font-family: 'Segoe UI','Noto Sans','Open Sans', sans-serif;
+            font-family: 'Alegreya Sans SC', sans-serif;
             text-transform: uppercase;
             font-size: 12px;
             position: absolute;
@@ -269,7 +269,7 @@ body {
             line-height: 10px;
             left: 100%;
             text-shadow: 1px 1px 0 #fff;
-        }*/
+        }
     }
     .mycursor {
       position: absolute;
