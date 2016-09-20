@@ -14,8 +14,8 @@ html
       canvas#cdraw
 
       canvas#cfg
-    .controls
-      .color()
+    .controls()
+      .color
         .shades
           - for (var i=0;i<32;i++)
             .shade(class='shade-'+(i+1),data-color=colors[0])

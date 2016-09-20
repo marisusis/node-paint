@@ -22,25 +22,7 @@ program
     winston.info("Starting node-paint...");
     winston.verbose("Starting servers...");
     // TODO: Separate http and socket server
-
     servers.http.start(port);
-    async.parallel({
-      http: function(cb) {
-        servers.http.start(port);
-        cb(null, "done");
-      },
-      repl: function(cb) {
-        readlineSync.promptCLLoop({
-          stop: function() {
-            return;
-          }
-        }, {
-          limitMessage: 'Command not found'
-        })
-      }
-    }, function(err, results) {
-      winston.verbose(results)
-    });
   });
 
 program.parse(process.argv);
