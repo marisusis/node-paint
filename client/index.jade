@@ -14,7 +14,7 @@ html
       canvas#cdraw
 
       canvas#cfg
-    .controls()
+    .controls
       .color
         .shades
           - for (var i=0;i<32;i++)
@@ -23,7 +23,7 @@ html
           - for (var i=0;i<10;i++)
             .hue(class='hue-'+(i+1),data-color=colors[i])
         .current
-      .brush(draggable)
+      .brush
         .sizes
           .size(data-size='sm')
           .size(data-size='md')
