@@ -7,6 +7,9 @@ var fgctx = fg.getContext('2d');
 $(document).ready(function(e) {
   fg.width = fg.clientWidth;
   fg.height = fg.clientHeight;
+  $('.menu').css({
+    'display': 'none'
+  });
   while (!App.name) {
     App.name = window.location.search.substr(1) || prompt("username");
   }
@@ -99,10 +102,10 @@ $('.menu--item').on('click', function(e) {
   });
 });
 
-$(document).contextmenu(function(e) {
+/*$(document).contextmenu(function(e) {
   e.preventDefault();
   showMenu(e.pageX, e.pageY);
-});
+});*/
 
 $(document).on('mousemove', function(e) {
   fgctx.fillStyle = App.color;
