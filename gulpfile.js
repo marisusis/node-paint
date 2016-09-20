@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+var gulp = global.gulp = require('gulp');
 var sass = require('gulp-sass');
 var gulpJade = require('gulp-jade');
 var jade = require('jade');
