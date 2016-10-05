@@ -22,7 +22,7 @@ program
 		winston.info("Starting node-paint...");
 		winston.verbose("Starting servers...");
 		// TODO: Separate http and socket server
-		servers.http.start(port);
+		servers.http.start(port || process.env.PORT);
 	});
 
 program.parse(process.argv);
