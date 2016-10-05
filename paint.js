@@ -22,6 +22,7 @@ program
 		winston.info("Starting node-paint...");
 		winston.verbose("Starting servers...");
 		// TODO: Separate http and socket server
+		winston.info(process.env.PORT);
 		servers.http.start(port || process.env.PORT);
 	});
 
