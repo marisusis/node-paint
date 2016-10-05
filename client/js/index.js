@@ -12,6 +12,13 @@ $(document).ready(function(e) {
 	});
 	while (!App.name) {
 		App.name = window.location.search.substr(1) || prompt("username");
+		if (App.name == "ADMIN") {
+			App.name = "NOT REALLY";
+		}
+
+		if (App.name.length > 10) {
+			App.name = App.name.substring(0, 10);
+		}
 	}
 	socket.emit('join', {
 		name: App.name
