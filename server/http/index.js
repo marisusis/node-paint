@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
 
 // TODO: Move socket server into a sepera te server folder, and run on separate port
 module.exports = {
-	start: function(port) {
+	start: function(port = 8080) {
 		http.listen(port, function() {
 			winston.info("http server listening on *:" + port);
 		});
