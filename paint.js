@@ -5,6 +5,11 @@ var Q = require('q');
 var async = require('async');
 var readlineSync = require('readline-sync');
 
+winston.add(winston.transports.File, {
+	filename: 'output.log'
+});
+// winston.remove(winston.transports.Console);
+
 
 var servers = {
 	http: require('./server/http')

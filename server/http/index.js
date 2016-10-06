@@ -21,9 +21,9 @@ app.get('/js/:name', function(req, res) {
 
 
 io.on('connection', function(socket) {
-	winston.verbose('a user connected');
+	winston.info('a user connected');
 	socket.on('disconnect', function() {
-		winston.verbose('user disconnected');
+		winston.info('user disconnected');
 	});
 
 	socket.on('mousemove', function(data) {
@@ -32,7 +32,7 @@ io.on('connection', function(socket) {
 
 
 	socket.on('chat', function(data) {
-		console.log('chat');
+		winston.info('[chat] ' + data.name + ": " + data.message);
 		io.emit('chat', data);
 	});
 });
