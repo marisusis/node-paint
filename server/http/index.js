@@ -32,10 +32,8 @@ io.on('connection', function(socket) {
 
 
 	socket.on('chat', function(data) {
-		'use strict';
-		let room = data.room;
-		let message = data.message;
-		let name = data.name;
+		console.log('chat');
+		io.emit('chat', data);
 	});
 });
 

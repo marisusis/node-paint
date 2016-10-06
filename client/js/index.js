@@ -201,6 +201,20 @@ var prev = {};
 
 var lastEmit = $.now();
 
+$('.chat-field .chat-field--input').keydown(function(e) {
+	if (e.which == 13) {
+		socket.emit('chat', {
+			name: App.name,
+			message: $('.chat-field .chat-field--input').val()
+		})
+		$(e.target).val('');
+	}
+});
+
+socket.on('chat', function(data) {
+	console.info(data.name + ": " + data.message);
+	$('.chat-log ul').append($('<li>').text(data.name + ": " + data.message));
+});
 //SOCKET
 
 socket.on('moving', function(data) {
