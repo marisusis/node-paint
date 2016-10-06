@@ -29,6 +29,12 @@ io.on('connection', function(socket) {
 	socket.on('mousemove', function(data) {
 		socket.broadcast.emit('moving', data);
 	});
+
+
+	socket.on('chat', function(data) {
+		console.log('chat');
+		io.emit('chat', data);
+	});
 });
 
 // TODO: Move socket server into a sepera te server folder, and run on separate port

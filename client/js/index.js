@@ -25,20 +25,6 @@ $(document).ready(function(e) {
 	});
 });
 
-function allowDrop(ev) {
-	ev.preventDefault();
-}
-
-function drag(ev) {
-	ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-	ev.preventDefault();
-	var data = ev.dataTransfer.getData("text");
-	ev.target.appendChild(document.getElementById(data));
-}
-
 var socket = io();
 
 var App = {};
@@ -215,6 +201,20 @@ var prev = {};
 
 var lastEmit = $.now();
 
+$('.chat-field .chat-field--input').keydown(function(e) {
+	if (e.which == 13) {
+		socket.emit('chat', {
+			name: App.name,
+			message: $('.chat-field .chat-field--input').val()
+		})
+		$(e.target).val('');
+	}
+});
+
+socket.on('chat', function(data) {
+	console.info(data.name + ": " + data.message);
+	$('.chat-log ul').append($('<li>').text(data.name + ": " + data.message));
+});
 //SOCKET
 
 socket.on('moving', function(data) {
