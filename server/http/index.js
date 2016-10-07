@@ -19,6 +19,10 @@ app.get('/js/:name', function(req, res) {
 	res.sendFile(APP_ROOT + '/client/js/' + req.params.name);
 });
 
+app.get('/tones/*', function(req, res) {
+	res.sendFile(APP_ROOT + '/client/dev_tones free/' + req.params[0]);
+});
+
 
 io.on('connection', function(socket) {
 	winston.info('a user connected');

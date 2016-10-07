@@ -141,6 +141,12 @@ $(document).on('mousemove', function(e) {
 
 });
 
+$(document).keydown(function(e) {
+	if (e.key == "c") {
+		clearPad()
+	}
+});
+
 $('.editor').on('mouseup mouseleave', function(e) {
 	App.drawing = false;
 	//   ctx.lineTo(e.pageX, e.pageY);
@@ -162,6 +168,11 @@ window.onresize = function(e) {
 
 
 //Functions
+
+function clearPad() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	console.info("Cleared canvas.");
+}
 
 function drawLine(fromx, fromy, tox, toy, color, width) {
 	ctx.beginPath();
@@ -214,6 +225,10 @@ $('.chat-field .chat-field--input').keydown(function(e) {
 socket.on('chat', function(data) {
 	console.info(data.name + ": " + data.message);
 	$('.chat-log ul').append($('<li>').text(data.name + ": " + data.message));
+	if (data.name !== App.name) {
+		var snd = new Audio("/tones/tones-wav/music_marimba_chord.wav"); // buffers automatically when created
+		snd.play();
+	}
 });
 //SOCKET
 
