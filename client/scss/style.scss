@@ -280,6 +280,7 @@ body {
       background: #000;
       border: solid 1px #fff;
       border-radius: 200%;
+      pointer-events: none;
       user-select: none;
     }
 }
