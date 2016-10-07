@@ -229,6 +229,7 @@ socket.on('chat', function(data) {
 		var snd = new Audio("/tones/tones-wav/music_marimba_chord.wav"); // buffers automatically when created
 		snd.play();
 	}
+	$('.chat-log ul').scrollTop($('.chat-log ul').height())
 });
 //SOCKET
 

@@ -4,7 +4,8 @@
   -webkit-box-sizing: border-box; }
 
 body {
-  user-select: none; }
+  user-select: none;
+  font-family: 'Lato'; }
 
 .editor {
   position: absolute;
@@ -819,10 +820,11 @@ body {
     height: 10px;
     background: #000;
     border: solid 1px #fff;
-    border-radius: 200%; }
+    border-radius: 200%;
+    pointer-events: none; }
     .cursors .cursor::after {
       content: attr(data-name);
-      font-family: 'Alegreya Sans SC', sans-serif;
+      font-family: 'Roboto', sans-serif;
       text-transform: uppercase;
       font-size: 12px;
       position: absolute;
@@ -853,9 +855,11 @@ body {
     width: 280px;
     height: 320px;
     background: #fff;
-    box-shadow: 0 0 5px #c0c0c0;
+    border: solid 1px #d0d0d0;
     display: block;
-    position: relative; }
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: hidden; }
     .chat-window .chat-log ul {
       position: relative;
       top: 0;
@@ -866,29 +870,50 @@ body {
       padding: 0;
       margin: 0;
       display: block;
-      overflow-y: scroll; }
+      overflow-y: scroll;
+      overflow-x: hidden; }
       .chat-window .chat-log ul li {
-        width: 100%;
-        min-height: 20px;
+        width: 260px;
+        min-height: 10px;
         max-width: 100%;
         display: inline-block;
-        text-indent: 5px;
-        line-height: 20px; }
+        line-height: 20px;
+        padding: 5px 5px 5px 5px;
+        -webkit-box-sizing: border-box; }
+        .chat-window .chat-log ul li:nth-child(odd) {
+          background: #efefef; }
   .chat-window .chat-field {
     width: 280px;
     height: 50px;
     background: #fff;
-    box-shadow: 0 0 5px #c0c0c0;
-    margin-top: 10px;
-    padding: 10px; }
+    border: solid 1px #d0d0d0;
+    margin-top: 10px; }
     .chat-window .chat-field input.chat-field--input {
       width: 200px;
-      height: 30px;
-      box-shadow: inset 0 0 5px #c0c0c0;
+      height: 100%;
       border: none;
-      text-indent: 10px; }
+      display: block;
+      float: left;
+      text-indent: 10px;
+      border-right: solid 1px #d0d0d0; }
       .chat-window .chat-field input.chat-field--input:focus {
         outline: none; }
+    .chat-window .chat-field button {
+      box-sizing: border-box;
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      float: left;
+      max-width: 80px;
+      min-width: 78px;
+      height: 100%;
+      background: #ffffff;
+      font-family: 'Lato'; }
+      .chat-window .chat-field button:focus {
+        outline: none; }
+      .chat-window .chat-field button:hover {
+        background: #eee; }
 
 .menu {
   position: fixed;
