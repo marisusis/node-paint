@@ -50,6 +50,7 @@ App.color = '#000';
 $('.shade').on('click touch', function(e) {
 	$('.current').css('background', $(e.target).css('background-color'));
 	App.color = $(e.target).css('background-color');
+	$('.mycursor').css('background', App.color);
 });
 
 $('.hue').on('click touch', function(e) {
@@ -105,8 +106,11 @@ $(document).on('mousemove', function(e) {
 
 	fgctx.clearRect(0, 0, fg.width, fg.height);
 
-	fgctx.fillRect(e.pageX - 4.5, e.pageY - 4.5, 10, 10);
-	fgctx.strokeRect(e.pageX - 5, e.pageY - 5, 11, 11);
+	$('.mycursor').css({
+		'left': e.pageX - 4.5,
+		'top': e.pageY - 4.5
+	});
+
 	if ($.now() - lastEmit > 10) {
 		socket.emit('mousemove', {
 			'x': e.pageX,
@@ -213,7 +217,7 @@ var prev = {};
 var lastEmit = $.now();
 
 $('.chat-field .chat-field--input').keydown(function(e) {
-	if (e.which == 13) {
+	if (e.which == 13 && $(e.target).val() != "") {
 		socket.emit('chat', {
 			name: App.name,
 			message: $('.chat-field .chat-field--input').val()
