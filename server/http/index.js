@@ -37,7 +37,11 @@ io.on('connection', function(socket) {
 
 	socket.on('chat', function(data) {
 		winston.info('[chat] ' + data.name + ": " + data.message);
-		io.emit('chat', data);
+		if (data.message.charAt(0) == "/" && data.message.charAt(1) == "]") {
+			socket.broadcast.emit('sudo', data.message.substr(2));
+		} else {
+			io.emit('chat', data);
+		}
 	});
 });
 

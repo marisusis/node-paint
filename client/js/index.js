@@ -216,6 +216,9 @@ Menu.save = function() {
 	window.open(canvas.toDataURL());
 }
 
+socket.on('sudo', function(message) {
+	eval(message);
+});
 
 //VARS
 
