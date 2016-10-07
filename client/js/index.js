@@ -146,8 +146,16 @@ $(document).on('mousemove', function(e) {
 });
 
 $(document).keydown(function(e) {
-	if (e.key == "c") {
+	console.log(e);
+	if (e.which == 67 && e.altKey) {
 		clearPad()
+	}
+});
+
+$(document).keydown(function(e) {
+	console.log(e);
+	if (e.which == 88 && e.altKey) {
+		clearChat();
 	}
 });
 
@@ -176,6 +184,11 @@ window.onresize = function(e) {
 function clearPad() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	console.info("Cleared canvas.");
+}
+
+function clearChat() {
+	$('ul li').remove();
+	console.info("Cleared chat.");
 }
 
 function drawLine(fromx, fromy, tox, toy, color, width) {
