@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/spacegeek224/node-paint.png?label=ready&title=Ready)](https://waffle.io/spacegeek224/node-paint)
 # node-paint
 A multiplayer paint web app written in Node.JS
 
