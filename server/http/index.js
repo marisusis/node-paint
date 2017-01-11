@@ -20,7 +20,7 @@ app.get('/js/:name', function(req, res) {
 });
 
 app.get('/tones/*', function(req, res) {
-	res.sendFile(APP_ROOT + '/client/dev_tones free/' + req.params[0]);
+	res.sendFile(APP_ROOT + '/client/sounds/tones/' + req.params[0]);
 });
 
 

@@ -250,7 +250,7 @@ socket.on('chat', function(data) {
 	console.info(data.name + ": " + data.message);
 	$('.chat-log ul').append($('<li>').text(data.name + ": " + data.message));
 	if (data.name !== App.name) {
-		var snd = new Audio("/tones/tones-wav/music_marimba_chord.wav"); // buffers automatically when created
+		var snd = new Audio("/tones/ding1.wav"); // buffers automatically when created
 		snd.play();
 	}
 	$('.chat-log ul').scrollTop($('.chat-log ul').height())
