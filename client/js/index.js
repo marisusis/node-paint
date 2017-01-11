@@ -234,9 +234,13 @@ var lastEmit = $.now();
 
 $('.chat-field .chat-field--input').keydown(function(e) {
 	if (e.which == 13 && $(e.target).val() != "") {
+    var message = $('.chat-field .chat-field--input').val();
+    if (message > 300) {
+			message = message(0, 300);
+		}
 		socket.emit('chat', {
 			name: App.name,
-			message: $('.chat-field .chat-field--input').val()
+			message: message
 		})
 		$(e.target).val('');
 	}
