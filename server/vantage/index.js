@@ -15,14 +15,11 @@ vantage
 // and show the Vantage prompt.
 
 module.exports = {
-  start: function(port = 8080) {
+  start: function(port = 8000) {
     vantage
       .delimiter("paint: ")
-      .listen(require("../http").app, port)
+      .listen(port)
       .show();
-    winston.info("http server listening on *:" + port);
     winston.info("vantage server listening on *:" + port);
-
-
   }
 }
