@@ -14,7 +14,7 @@ winston.add(winston.transports.File, {
 var servers = {
 	http: require('./server/http'),
   vantage: require('./server/vantage')
-}
+};
 
 program
 	.version('v0.0.1')
@@ -29,8 +29,8 @@ program
 		winston.verbose("Starting servers...");
 		// TODO: Separate http and socket server
 		winston.info(process.env.PORT);
+    require("./server/socket");
 		servers.http.start(port || process.env.PORT);
-    servers.vantage.start(port || process.env.PORT);
   
 	});
 

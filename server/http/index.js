@@ -1,6 +1,6 @@
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+
 var winston = require('winston');
 var path = require('path');
 var Q = require('q');
@@ -24,27 +24,6 @@ app.get('/tones/*', function(req, res) {
 });
 
 
-io.on('connection', function(socket) {
-  winston.info('a user connected');
-  socket.on('disconnect', function() {
-    winston.info('user disconnected');
-  });
-
-  socket.on('mousemove', function(data) {
-    socket.broadcast.emit('moving', data);
-  });
-
-
-  socket.on('chat', function(data) {
-    winston.info('[chat] ' + data.name + ": " + data.message);
-    if(data.message.charAt(0) == "/" && data.message.charAt(1) == "]") {
-      // 			socket.broadcast.emit('sudo', data.message.substr(2));
-    } else {
-      io.emit('chat', data);
-    }
-  });
-});
-
 // TODO: Move socket server into a sepera te server folder, and run on separate port
 module.exports = {
   start: function(port = 8080) {
@@ -56,5 +35,5 @@ module.exports = {
     });
   },
   app: app,
-  io: io
+  http: http
 }
